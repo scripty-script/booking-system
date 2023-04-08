@@ -34,10 +34,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if ($request->user()->canAccessFilament()) {
-            return Inertia::location('/admin');
-        }
-
         return redirect(RouteServiceProvider::HOME);
     }
 

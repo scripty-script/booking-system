@@ -17,9 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
-
-    public const FILAMENT = '/admin';
+    public const HOME = '/redirect-session';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,11 +17,15 @@ use Inertia\Inertia;
 |
 */
 
-Route::redirect('/', config('filament.path'));
+Route::redirect('/', 'login');
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome');
-// })->middleware('guest');
+Route::get('/redirect-session', function (Request $request) {
+    if ($request->user()->canAccessFilament()) {
+        return Inertia::render('RedirectSession', [
+            'location' => config('filament.path')
+        ]);
+    }
+})->middleware(['auth']);
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
@@ -32,4 +37,4 @@ Route::redirect('/', config('filament.path'));
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
